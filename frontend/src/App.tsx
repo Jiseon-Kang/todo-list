@@ -1,6 +1,5 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import './App.css';
-import axios from "axios";
 
 function App() {
 
@@ -21,6 +20,16 @@ function App() {
         setTodoList([...todoList, todo])
         setTodo('')
     }
+
+    useEffect(() => {
+        // axios.get('https://pokeapi.co/api/v2/pokemon?limit=10&offset=0')
+        //     .then((response) => {
+        //         const data = response.data
+        //         const pokemons = data.results
+        //         const result = pokemons.map((pokemon: any) => pokemon.name)
+        //         setTodoList([...todoList, ...result])
+        //     })
+    }, [])
 
     const keyDownHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === "Enter") {
