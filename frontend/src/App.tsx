@@ -1,5 +1,6 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
 import './App.css';
+import axios from "axios";
 
 function App() {
 
@@ -28,6 +29,11 @@ function App() {
         //         const pokemons = data.results
         //         const result = pokemons.map((pokemon: any) => pokemon.name)
         //         setTodoList([...todoList, ...result])
+        //     })
+        // axios.get('/todos')
+        //     .then((response) => {
+        //         const data = response.data
+        //         setTodoList([...todoList, ...data])
         //     })
     }, [])
 
