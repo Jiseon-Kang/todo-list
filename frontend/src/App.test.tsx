@@ -2,6 +2,7 @@ import React from 'react';
 import {render, screen} from '@testing-library/react';
 import userEvent from "@testing-library/user-event";
 import App from './App';
+import axios from "axios";
 
 describe('App Tests', () => {
     it('render static element', () => {
@@ -36,6 +37,21 @@ describe('App Tests', () => {
         await userEvent.type(screen.getByRole('textbox'), '{enter}')
 
         expect(screen.getByText('Hello World')).toBeInTheDocument()
+    })
+
+    it('기존에 입력했던 항목들이 조회된다.', async () => {
+        const response = {
+            data: [
+                {id: '0001', content: "Hello World"}
+            ]
+        }
+        jest.spyOn(axios, 'get').mockResolvedValue(response)
+        render(<App/>)
+
+        // await waitFor(() => {
+        //     expect(screen.getByText("Hello World")).toBeInTheDocument()
+        // })
+        expect(await screen.findByText("Hello World")).toBeInTheDocument()
     })
 })
 

@@ -4,7 +4,7 @@ import axios from "axios";
 
 function App() {
 
-    const [todoList, setTodoList] = useState<string[]>(['Hello', "World"])
+    const [todoList, setTodoList] = useState<string[]>([])
     const [todo, setTodo] = useState<string>('')
 
     const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -30,11 +30,12 @@ function App() {
         //         const result = pokemons.map((pokemon: any) => pokemon.name)
         //         setTodoList([...todoList, ...result])
         //     })
-        // axios.get('/todos')
-        //     .then((response) => {
-        //         const data = response.data
-        //         setTodoList([...todoList, ...data])
-        //     })
+        axios.get('/todo')
+            .then((response) => {
+                const data = response.data
+                const result = data.map((pokemon: any) => pokemon.content)
+                setTodoList([...todoList, ...result])
+            })
     }, [])
 
     const keyDownHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
