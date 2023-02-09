@@ -7,35 +7,32 @@ function App() {
     const [todoList, setTodoList] = useState<string[]>([])
     const [todo, setTodo] = useState<string>('')
 
+    const getTodos = async () => {
+        const response = await axios.get('/todo')
+        const data = response.data
+        const result = data.map((todoFromServer: any) => todoFromServer.content)
+        setTodoList(result)
+    }
+
+    const createTodo = async () => {
+        await axios.post('/todo', {content: todo})
+        await getTodos()
+    }
+
     const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setTodo(event.target.value)
     }
 
     const addTodo = () => {
-        // const result = []
-        // for(let index = 0 ; index < todoList.length; index++) {
-        //     result.push(todoList[index])
-        // }
-        // result.push(todo)
-        // setTodoList(result)
-        setTodoList([...todoList, todo])
+        if (todo === '') {
+            return
+        }
         setTodo('')
+        createTodo()
     }
 
     useEffect(() => {
-        // axios.get('https://pokeapi.co/api/v2/pokemon?limit=10&offset=0')
-        //     .then((response) => {
-        //         const data = response.data
-        //         const pokemons = data.results
-        //         const result = pokemons.map((pokemon: any) => pokemon.name)
-        //         setTodoList([...todoList, ...result])
-        //     })
-        axios.get('/todo')
-            .then((response) => {
-                const data = response.data
-                const result = data.map((pokemon: any) => pokemon.content)
-                setTodoList([...todoList, ...result])
-            })
+        getTodos()
     }, [])
 
     const keyDownHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {

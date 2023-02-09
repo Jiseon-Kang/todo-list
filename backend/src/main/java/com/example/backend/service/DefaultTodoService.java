@@ -20,4 +20,9 @@ public class DefaultTodoService implements TodoService {
     public List<Todo> getTodos() {
         return todoStore.getTodos();
     }
+
+    @Override
+    public void createTodo(Todo todo) {
+       todoStore.createTodo(todo);
+    }
 }

@@ -7,4 +7,6 @@ import java.util.List;
 // 기능에 대한 명세서
 public interface TodoService {
     List<Todo> getTodos();
+
+    void createTodo(Todo todo);
 }

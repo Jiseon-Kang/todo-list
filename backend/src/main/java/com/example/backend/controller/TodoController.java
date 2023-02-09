@@ -3,6 +3,8 @@ package com.example.backend.controller;
 import com.example.backend.domain.Todo;
 import com.example.backend.service.TodoService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -21,5 +23,11 @@ public class TodoController {
     @GetMapping("/todo")
     public List<Todo> getTodos() {
         return todoService.getTodos();
+    }
+
+
+    @PostMapping("/todo")
+    public void createTodo(@RequestBody Todo todo) {
+        todoService.createTodo(todo);
     }
 }

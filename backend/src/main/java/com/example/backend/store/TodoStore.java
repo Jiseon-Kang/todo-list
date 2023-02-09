@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface TodoStore {
     List<Todo> getTodos();
+
+    void createTodo(Todo todo);
 }

@@ -29,4 +29,11 @@ public class JpaTodoStore implements TodoStore {
         }
         return result;
     }
+
+    @Override
+    public void createTodo(Todo todo) {
+        TodoEntity todoEntity = new TodoEntity();
+        todoEntity.setContent(todo.getContent());
+        todoRepository.save(todoEntity);
+    }
 }
